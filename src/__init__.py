@@ -1,1 +1,0 @@
-"""Bank marketing model package."""
