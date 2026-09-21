@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+.env
+
+# Generated model artifacts; commit intentionally versioned artifacts explicitly when needed.
+models/*.joblib
+models/*.pkl
+
+# Local datasets can be large or contain sensitive data.
+data/raw/*.csv
+
+# Frontend dependencies and build output.
+frontend/node_modules/
+frontend/dist/
