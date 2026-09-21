@@ -1,11 +1,21 @@
-"""Feature engineering and column definitions."""
+"""Feature engineering definitions."""
 
-import pandas as pd
+RAW_NUMERIC = ["age", "balance", "day", "campaign", "pdays", "previous"]
+RAW_CATEGORICAL = [
+    "job",
+    "marital",
+    "education",
+    "default",
+    "housing",
+    "loan",
+    "contact",
+    "month",
+    "poutcome",
+]
+NUMERIC = RAW_NUMERIC
+CATEGORICAL = RAW_CATEGORICAL
 
 
-TARGET_COLUMN = "y"
-
-
-def add_features(data: pd.DataFrame) -> pd.DataFrame:
-    """Return a feature-engineered copy of the input data."""
-    return data.copy()
+def add_features(X):
+    """Return an unchanged copy until feature engineering is implemented."""
+    return X.copy()
