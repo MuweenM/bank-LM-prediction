@@ -21,3 +21,4 @@ pip install -r requirements.txt
 pytest
 uvicorn backend.main:app --reload
 ```
+https://res.cloudinary.com/dckoipgrs/image/upload/v1790019646/OBJ_5.0_nduqor.png
