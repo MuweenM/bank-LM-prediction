@@ -6,7 +6,7 @@
 2. Build the frontend with `cd frontend && npm run build`.
 3. From the repository root, start `python -m uvicorn backend.main:app --port 8000`.
 4. Open http://localhost:8000.
-5. Replace every `[FILL IN]` value below with the exact values and results from the final model run.
+5. Use the verified values below from the final model run.
 
 ## 0:00-0:30: The problem
 
@@ -22,7 +22,7 @@ The model returns a High, Medium, or Low priority. The score ranks clients; it i
 
 > The analysis found that previous campaign outcome is highly informative. Clients with a previous success were much more likely to subscribe than the overall 11.7% rate, while the model also combines contact channel, campaign history, client information, and balance.
 
-Optional exact analysis result: `[FILL IN: one concise finding and its measured rate]`.
+Optional exact analysis result: clients with `poutcome=success`, `housing=no`, and `pdays=90+` subscribed at 70.6% in the association-rule analysis, versus the 11.7% overall rate.
 
 Mention that `duration` is excluded because it is only known after the call and would leak the answer.
 
@@ -32,33 +32,33 @@ Open **Score a client** and type this exact final-model example:
 
 | Field | Value |
 |---|---|
-| Age | `[FILL IN]` |
-| Job | `[FILL IN]` |
-| Marital status | `[FILL IN]` |
-| Education | `[FILL IN]` |
-| Credit in default | `[FILL IN]` |
-| Balance | `[FILL IN]` |
-| Housing loan | `[FILL IN]` |
-| Personal loan | `[FILL IN]` |
-| Contact channel | `[FILL IN]` |
-| Month | `[FILL IN]` |
-| Planned day of month | `[FILL IN]` |
-| Campaign contacts so far | `[FILL IN]` |
-| Days since previous campaign | `[FILL IN]` |
-| Previous contacts | `[FILL IN]` |
-| Previous campaign outcome | `[FILL IN]` |
+| Age | `55` |
+| Job | `admin.` |
+| Marital status | `married` |
+| Education | `tertiary` |
+| Credit in default | `no` |
+| Balance | `5000` |
+| Housing loan | `no` |
+| Personal loan | `no` |
+| Contact channel | `cellular` |
+| Month | `may` |
+| Planned day of month | `10` |
+| Campaign contacts so far | `1` |
+| Days since previous campaign | `-1` |
+| Previous contacts | `2` |
+| Previous campaign outcome | `success` |
 
 Click **Score this client**.
 
 **Expected result to fill in after the final model run:**
 
-- Score: `[FILL IN]`
-- Band: `[FILL IN: ideally High]`
-- Message/rate: `[FILL IN]`
+- Score: `0.8985` (displayed as 90%)
+- Band: `High`
+- Message/rate: `52.4% of clients in this band subscribed; overall rate 11.7%`
 
 **Say:**
 
-> This is a strong prospect under the model. The observed subscription rate for the `[FILL IN]` band was `[FILL IN]%`, compared with `[FILL IN]%` across all clients.
+> This is a strong prospect under the model. The observed subscription rate for the High band was 52.4%, compared with 11.7% across all clients.
 
 ## 2:30-3:30: Weak prospect
 
@@ -66,29 +66,29 @@ Reset the form or use a new browser tab. Type this exact final-model example:
 
 | Field | Value |
 |---|---|
-| Age | `[FILL IN]` |
-| Job | `[FILL IN]` |
-| Marital status | `[FILL IN]` |
-| Education | `[FILL IN]` |
-| Credit in default | `[FILL IN]` |
-| Balance | `[FILL IN]` |
-| Housing loan | `[FILL IN]` |
-| Personal loan | `[FILL IN]` |
-| Contact channel | `[FILL IN]` |
-| Month | `[FILL IN]` |
-| Planned day of month | `[FILL IN]` |
-| Campaign contacts so far | `[FILL IN]` |
-| Days since previous campaign | `[FILL IN]` |
-| Previous contacts | `[FILL IN]` |
-| Previous campaign outcome | `[FILL IN]` |
+| Age | `25` |
+| Job | `blue-collar` |
+| Marital status | `single` |
+| Education | `secondary` |
+| Credit in default | `no` |
+| Balance | `0` |
+| Housing loan | `yes` |
+| Personal loan | `yes` |
+| Contact channel | `unknown` |
+| Month | `may` |
+| Planned day of month | `20` |
+| Campaign contacts so far | `5` |
+| Days since previous campaign | `-1` |
+| Previous contacts | `0` |
+| Previous campaign outcome | `unknown` |
 
 Click **Score this client**.
 
 **Expected result to fill in after the final model run:**
 
-- Score: `[FILL IN]`
-- Band: `[FILL IN: ideally Low]`
-- Message/rate: `[FILL IN]`
+- Score: `0.1372` (displayed as 14%)
+- Band: `Low`
+- Message/rate: `4.7% of clients in this band subscribed; overall rate 11.7%`
 
 **Say:**
 
@@ -119,12 +119,12 @@ Point to one rule and say:
 
 Show the decision-tree text and mention that the association-rule notebook also compared Apriori with FP-Growth.
 
-Open **Rank a call list** if time allows. Upload `[FILL IN: CSV filename]` and point out that rows are returned in score order with the score, band, and identifying columns.
+Open **Rank a call list** if time allows. Upload `data/raw/bank_marketing.csv` and point out that rows are returned in score order with the score, band, and identifying columns.
 
 ## 4:45-5:00: Recommendation
 
 **Say:**
 
-> Use the model as a prioritisation assistant. Start with High-band clients, then Medium, and cover Low-band clients when capacity remains. In the current held-out results, the observed subscription rates are approximately High: 50.4%, Medium: 15.2%, and Low: 5.2%, with an overall rate of 11.7%. These are observed rates from held-out data, not promises about individuals.
+> Use the model as a prioritisation assistant. Start with High-band clients, then Medium, and cover Low-band clients when capacity remains. In the current held-out results, the observed subscription rates are High: 52.4%, Medium: 15.7%, and Low: 4.7%, with an overall rate of 11.7%. These are observed rates from held-out data, not promises about individuals.
 
-Final values to confirm after retraining: High `[FILL IN]%`, Medium `[FILL IN]%`, Low `[FILL IN]%`, overall `[FILL IN]%`, PR-AUC `[FILL IN]`.
+Final values after retraining: High `52.4%`, Medium `15.7%`, Low `4.7%`, overall `11.7%`, PR-AUC `0.4638`.
