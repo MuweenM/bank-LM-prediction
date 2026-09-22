@@ -1,0 +1,113 @@
+{
+  "rules": [
+    {
+      "if": [
+        "housing=no",
+        "pdays=90+",
+        "poutcome=success"
+      ],
+      "support": 0.014073213890732138,
+      "confidence": 0.7059639389736477,
+      "lift": 6.034815349751569,
+      "text": "Prioritise clients where housing=no and pdays=90+ and poutcome=success: 70.6% subscribed."
+    },
+    {
+      "if": [
+        "contact=cellular",
+        "housing=no",
+        "poutcome=success"
+      ],
+      "support": 0.014598540145985401,
+      "confidence": 0.7021276595744681,
+      "lift": 6.0020215531764025,
+      "text": "Prioritise clients where contact=cellular and housing=no and poutcome=success: 70.2% subscribed."
+    },
+    {
+      "if": [
+        "housing=no",
+        "loan=no",
+        "poutcome=success"
+      ],
+      "support": 0.015566246405662464,
+      "confidence": 0.7019950124688279,
+      "lift": 6.000887641449436,
+      "text": "Prioritise clients where housing=no and loan=no and poutcome=success: 70.2% subscribed."
+    },
+    {
+      "if": [
+        "default=no",
+        "housing=no",
+        "poutcome=success"
+      ],
+      "support": 0.016091572660915727,
+      "confidence": 0.7003610108303249,
+      "lift": 5.986919650132637,
+      "text": "Prioritise clients where default=no and housing=no and poutcome=success: 70.0% subscribed."
+    },
+    {
+      "if": [
+        "housing=no",
+        "poutcome=success"
+      ],
+      "support": 0.016091572660915727,
+      "confidence": 0.6995192307692307,
+      "lift": 5.979723833245458,
+      "text": "Prioritise clients where housing=no and poutcome=success: 70.0% subscribed."
+    },
+    {
+      "if": [
+        "campaign=1",
+        "pdays=90+",
+        "poutcome=success"
+      ],
+      "support": 0.011087148860871488,
+      "confidence": 0.6890034364261168,
+      "lift": 5.889831313793381,
+      "text": "Prioritise clients where campaign=1 and pdays=90+ and poutcome=success: 68.9% subscribed."
+    },
+    {
+      "if": [
+        "campaign=1",
+        "contact=cellular",
+        "poutcome=success"
+      ],
+      "support": 0.011695421366954215,
+      "confidence": 0.6768000000000001,
+      "lift": 5.78551226660364,
+      "text": "Prioritise clients where campaign=1 and contact=cellular and poutcome=success: 67.7% subscribed."
+    },
+    {
+      "if": [
+        "campaign=1",
+        "loan=no",
+        "poutcome=success"
+      ],
+      "support": 0.012054855120548552,
+      "confidence": 0.6759689922480621,
+      "lift": 5.778408535010141,
+      "text": "Prioritise clients where campaign=1 and loan=no and poutcome=success: 67.6% subscribed."
+    },
+    {
+      "if": [
+        "campaign=1",
+        "default=no",
+        "poutcome=success"
+      ],
+      "support": 0.012663127626631276,
+      "confidence": 0.6755162241887905,
+      "lift": 5.7745381225384484,
+      "text": "Prioritise clients where campaign=1 and default=no and poutcome=success: 67.6% subscribed."
+    },
+    {
+      "if": [
+        "campaign=1",
+        "poutcome=success"
+      ],
+      "support": 0.012663127626631276,
+      "confidence": 0.6755162241887905,
+      "lift": 5.7745381225384484,
+      "text": "Prioritise clients where campaign=1 and poutcome=success: 67.6% subscribed."
+    }
+  ],
+  "tree_text": "|--- cat__poutcome_success <= 0.50\n|   |--- cat__contact_unknown <= 0.50\n|   |   |--- num__has_debt <= -0.25\n|   |   |   |--- cat__month_aug <= 0.50\n|   |   |   |   |--- class: yes\n|   |   |   |--- cat__month_aug >  0.50\n|   |   |   |   |--- class: no\n|   |   |--- num__has_debt >  -0.25\n|   |   |   |--- cat__month_oct <= 0.50\n|   |   |   |   |--- class: no\n|   |   |   |--- cat__month_oct >  0.50\n|   |   |   |   |--- class: yes\n|   |--- cat__contact_unknown >  0.50\n|   |   |--- cat__marital_married <= 0.50\n|   |   |   |--- num__day <= 1.64\n|   |   |   |   |--- class: no\n|   |   |   |--- num__day >  1.64\n|   |   |   |   |--- class: yes\n|   |   |--- cat__marital_married >  0.50\n|   |   |   |--- cat__month_may <= 0.50\n|   |   |   |   |--- class: no\n|   |   |   |--- cat__month_may >  0.50\n|   |   |   |   |--- class: no\n|--- cat__poutcome_success >  0.50\n|   |--- cat__housing_yes <= 0.50\n|   |   |--- num__pdays <= 1.37\n|   |   |   |--- num__pdays <= 0.58\n|   |   |   |   |--- class: yes\n|   |   |   |--- num__pdays >  0.58\n|   |   |   |   |--- class: yes\n|   |   |--- num__pdays >  1.37\n|   |   |   |--- num__pdays <= 1.44\n|   |   |   |   |--- class: yes\n|   |   |   |--- num__pdays >  1.44\n|   |   |   |   |--- class: yes\n|   |--- cat__housing_yes >  0.50\n|   |   |--- cat__month_may <= 0.50\n|   |   |   |--- num__age <= -0.41\n|   |   |   |   |--- class: yes\n|   |   |   |--- num__age >  -0.41\n|   |   |   |   |--- class: yes\n|   |   |--- cat__month_may >  0.50\n|   |   |   |--- class: yes\n"
+}

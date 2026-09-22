@@ -21,6 +21,24 @@ export type Prediction = {
 
 export type PredictionValues = Record<string, string | number>
 
+export type InsightRule = {
+  if: string[]
+  support: number
+  confidence: number
+  lift: number
+  text: string
+}
+
+export type Insights = {
+  rules: InsightRule[]
+  tree_text: string
+}
+
+export type BatchRow = Record<string, string | number | null> & {
+  score: number
+  band: 'High' | 'Medium' | 'Low'
+}
+
 export class ApiError extends Error {
   fieldErrors: Record<string, string>
 
@@ -69,4 +87,18 @@ export function predict(values: PredictionValues): Promise<Prediction> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(values),
   })
+}
+
+export function getInsights(): Promise<Insights> {
+  return request<Insights>('/insights')
+}
+
+export async function predictBatch(file: File): Promise<BatchRow[]> {
+  const formData = new FormData()
+  formData.append('file', file)
+  const body = await request<BatchRow[] | { rows: BatchRow[] }>('/predict/batch', {
+    method: 'POST',
+    body: formData,
+  })
+  return Array.isArray(body) ? body : body.rows
 }
