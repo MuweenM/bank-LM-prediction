@@ -10,18 +10,19 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import average_precision_score, roc_auc_score
 
 from src.data import get_split
-from src.features import CATEGORICAL, RAW_CATEGORICAL, RAW_NUMERIC
+from src.features import CATEGORICAL, RAW_CATEGORICAL, RAW_NUMERIC, add_features
 from src.pipeline import build
 
 
 # Replace this estimator after model selection is complete.
-FINAL_MODEL = HistGradientBoostingClassifier(learning_rate=0.05, max_depth=4, class_weight="balanced", random_state=42)
+FINAL_MODEL = HistGradientBoostingClassifier(learning_rate=0.1, max_depth=None, max_leaf_nodes=31, min_samples_leaf=50, l2_regularization=10.0, class_weight="balanced", random_state=42)
 
 
 def main() -> None:
     X_train, X_test, y_train, y_test = get_split()
     pipeline = build(FINAL_MODEL)
     pipeline.fit(X_train, y_train)
+    feature_data = add_features(X_train)
     scores = pipeline.predict_proba(X_test)[:, 1]
     high, medium = pd.Series(scores).quantile([0.90, 0.70])
     bands = pd.Series("Low", index=range(len(scores)))
@@ -32,7 +33,7 @@ def main() -> None:
         "sklearn": sklearn.__version__,
         "raw_numeric": RAW_NUMERIC,
         "raw_categorical": RAW_CATEGORICAL,
-        "categories": {column: sorted(X_train[column].unique().tolist()) for column in CATEGORICAL},
+        "categories": {column: sorted(feature_data[column].unique().tolist()) for column in CATEGORICAL},
         "band_cutoffs": {"high": float(high), "medium": float(medium)},
         "band_rates": {key: float(value) for key, value in band_rates.items()},
         "base_rate": float(y_train.mean()),
