@@ -9,5 +9,17 @@
     "model__min_samples_leaf": 10,
     "model__max_features": 0.5,
     "model__max_depth": 20
+  },
+  "HistGradientBoosting-tuned": {
+    "model__min_samples_leaf": 50,
+    "model__max_leaf_nodes": 31,
+    "model__max_depth": null,
+    "model__learning_rate": 0.1,
+    "model__l2_regularization": 10.0
+  },
+  "KNeighbors-tuned": {
+    "model__n_neighbors": 51,
+    "model__p": 1,
+    "model__weights": "distance"
   }
 }

@@ -32,8 +32,7 @@ def load_bank(path: str | Path = DATA_PATH) -> pd.DataFrame:
     bank_marketing = fetch_ucirepo(id=222)
     features = bank_marketing.data.features.copy()
     target = bank_marketing.data.targets.iloc[:, 0].rename("y")
-    data = pd.concat([features, target], axis=1)
-    data = _clean_columns(data)
+    data = _clean_columns(pd.concat([features, target], axis=1))
     path.parent.mkdir(parents=True, exist_ok=True)
     data.to_csv(path, index=False)
     return data
