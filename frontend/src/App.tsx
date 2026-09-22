@@ -150,19 +150,19 @@ function App() {
   }
 
   return (
-    <main className="min-h-screen bg-stone-50 px-4 py-8 text-stone-950 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-8 max-w-2xl">
+    <main className="min-h-screen bg-stone-50 px-4 py-6 text-stone-950 sm:px-6 sm:py-10 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <header className="mx-auto mb-8 max-w-3xl text-center sm:mb-10">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-emerald-700">Bank campaign desk</p>
           <h1 className="font-serif text-4xl leading-tight tracking-tight sm:text-5xl">Find the next best call.</h1>
-          <p className="mt-4 text-base leading-7 text-stone-600">Prioritise conversations using the information available before the call.</p>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-stone-600">Prioritise conversations using the information available before the call.</p>
         </header>
 
-        <Tabs value={activeTab} onValueChange={(value) => setActiveTab((value ?? 'score') as TabName)}>
-          <TabsList className="mb-8 grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-3">
-            <TabsTrigger value="score" className="h-10">Score a client</TabsTrigger>
-            <TabsTrigger value="insights" className="h-10">What drives subscriptions</TabsTrigger>
-            <TabsTrigger value="batch" className="h-10">Rank a call list</TabsTrigger>
+        <Tabs className="flex flex-col gap-2" value={activeTab} onValueChange={(value) => setActiveTab((value ?? 'score') as TabName)}>
+          <TabsList className="mx-auto mb-8 grid h-auto w-full max-w-4xl grid-cols-1 gap-1 rounded-xl p-1 sm:grid-cols-3">
+            <TabsTrigger value="score" className="min-h-10 whitespace-normal px-3 py-2 text-center leading-5">Score a client</TabsTrigger>
+            <TabsTrigger value="insights" className="min-h-10 whitespace-normal px-3 py-2 text-center leading-5">What drives subscriptions</TabsTrigger>
+            <TabsTrigger value="batch" className="min-h-10 whitespace-normal px-3 py-2 text-center leading-5">Rank a call list</TabsTrigger>
           </TabsList>
           <TabsContent value="score"><ScoreTab schema={schema} values={values} fieldErrors={fieldErrors} formError={formError} loading={loading} submitting={submitting} result={result} onChange={updateValue} onSubmit={handleSubmit} /></TabsContent>
           <TabsContent value="insights"><InsightsTab insights={insights} loading={insightsLoading} error={insightsError} runtimeSummary={runtimeSummary} /></TabsContent>
@@ -187,22 +187,22 @@ type ScoreTabProps = {
 
 function ScoreTab({ schema, values, fieldErrors, formError, loading, submitting, result, onChange, onSubmit }: ScoreTabProps) {
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
-      <section>
+    <div className="grid gap-8 md:grid-cols-3 md:items-start md:gap-10">
+      <section className="md:col-span-2">
         {formError && <Alert variant="destructive" className="mb-6"><AlertTitle>Could not score this client</AlertTitle><AlertDescription>{formError}</AlertDescription></Alert>}
         <form onSubmit={onSubmit} className="space-y-7" noValidate>
           {groups.map((group) => (
             <Card key={group} className="border-stone-200 bg-white shadow-sm">
-              <CardHeader className="pb-4"><CardTitle className="text-xl">{group}</CardTitle><CardDescription>{group === 'About the client' ? 'Basic information from the customer record.' : group === 'Financial situation' ? 'Current lending and balance indicators.' : 'Details known before this campaign call.'}</CardDescription></CardHeader>
-              <CardContent className="grid gap-5 sm:grid-cols-2">
+              <CardHeader className="border-b border-stone-100 pb-4"><CardTitle className="text-xl">{group}</CardTitle><CardDescription>{group === 'About the client' ? 'Basic information from the customer record.' : group === 'Financial situation' ? 'Current lending and balance indicators.' : 'Details known before this campaign call.'}</CardDescription></CardHeader>
+              <CardContent className="grid gap-x-6 gap-y-5 pt-6 sm:grid-cols-2">
                 {fields.filter((field) => field.group === group).map((field) => <FieldControl key={field.key} field={field} schema={schema} value={values[field.key]} error={fieldErrors[field.key]} disabled={loading || submitting} onChange={onChange} />)}
               </CardContent>
             </Card>
           ))}
-          <Button type="submit" disabled={loading || submitting || !schema} className="h-11 w-full sm:w-auto">{submitting ? 'Scoring client...' : 'Score this client'}</Button>
+          <Button type="submit" disabled={loading || submitting || !schema} className="h-11 w-full px-8 sm:w-auto">{submitting ? 'Scoring client...' : 'Score this client'}</Button>
         </form>
       </section>
-      <aside className="lg:sticky lg:top-8"><ResultCard result={result} schema={schema} /></aside>
+      <aside className="md:sticky md:top-8"><ResultCard result={result} schema={schema} /></aside>
     </div>
   )
 }
