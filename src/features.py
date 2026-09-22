@@ -1,11 +1,10 @@
-"""Feature engineering and column definitions."""
+"""Feature engineering definitions."""
 
 import numpy as np
 import pandas as pd
 
 
 TARGET_COLUMN = "y"
-
 RAW_NUMERIC = ["age", "balance", "day", "campaign", "pdays", "previous"]
 RAW_CATEGORICAL = [
     "job",
@@ -18,7 +17,6 @@ RAW_CATEGORICAL = [
     "month",
     "poutcome",
 ]
-
 NUMERIC = RAW_NUMERIC + ["prev_contacted", "has_debt", "balance_log"]
 CATEGORICAL = RAW_CATEGORICAL + ["age_group"]
 
