@@ -6,3 +6,10 @@ The model deliberately excludes `duration`: it is only known after the call and 
 <div align="center">
   <img src="https://res.cloudinary.com/dckoipgrs/image/upload/v1790019646/OBJ_5.0_nduqor.png" alt="Objective5.0 Logo"/>
 </div>
+</br>
+</br>
+</br>
+<div align="center">
+  <img src="https://res.cloudinary.com/dckoipgrs/image/upload/v1790200519/Screenshot_2026-09-24_at_03.23.06_sqljji.png" alt="demo"/>
+</div>
+
