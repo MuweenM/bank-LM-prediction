@@ -1,5 +1,5 @@
 {
-  "sklearn": "1.9.0",
+  "sklearn": "1.9.1",
   "raw_numeric": [
     "age",
     "balance",
